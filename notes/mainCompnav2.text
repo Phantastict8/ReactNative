@@ -1,0 +1,78 @@
+import React, { Component } from 'react';
+import Home from './HomeComponent;
+import Directory from './DirectoryComponent';
+import CampsiteInfo from './CampsiteInfoComponent';
+import { View, Platform } from 'react-native';
+import {createStackNavigator} from 'react-navigation-stack';
+import {createDrawerNavigator} from 'react-navigation-drawer';
+import {createAppContainer} from 'react-navigation';expo statusBarHeight
+
+const DirectoryNavigator = createStackNavigator(
+    {
+        Directory: {screen: Directory},
+        CampsiteInfo: {screen: CampsiteInfo}
+    },
+    {
+        initialRoutename: 'Directory',
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5637DD'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
+    }
+);
+
+const HomeNavigator = createStacknavigator(
+    {
+        Home: {screen: Home}
+    },
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5637DD'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
+    }
+);
+
+const MainNavigator = createDrawerNavigator(
+    {
+        Home: { screen: HomeNavigator },
+        Directory: { screen: DirectoryNavigator }
+    },
+    {
+        drawerBackgroundColor: '#CEC8FF'
+    }
+);
+
+const AppNavigator= createAppContainer(MainNavigator)
+
+class Main extends Component {
+    render() {
+        return (
+            <View 
+                style={{
+                    flex: 1,
+                    paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight
+            }}>
+                <AppNavigator/>
+            </View>
+        );
+    }
+}  
+
+export default Main;
+
+NOTES!!!!!!
+47) creatinng the drawer navigator... needs for its first argument an object that will contain the screens that will be in this drawer... 49-50 we want to put the Home and Directory screens in this drawer. except we want to route throught the stack navigator so give the HomeNavigator & DirectoryNavigator components here and not the actual home and or directory components themselves 
+2nd argument (optional).. set the styles as seen line 53)
+
+57) the MainNavigator has replaced the DirectoryNavigator as the top level navigator.. so when the app first loads it will default to the first screen in the MainNavigator which is the HomeNavigator and are side drawer will be available from any of the screens. 

@@ -1,0 +1,57 @@
+import React, { Component } from 'react';
+import Directory from './DirectoryComponent';
+import CampsiteInfo from './CampsiteInfoComponent';
+import { View, Platform } from 'react-native';
+import {createStackNavigator} from 'react-navigation-stack';
+import {createAppContainer} from 'react-navigation';
+
+const DirectoryNavigator = createStackNavigator(
+    {
+        Directory: {screen: Directory},
+        CampsiteInfo: {screen: CampsiteInfo}
+    },
+    {
+        initialRoutename: 'Directory',
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5637DD'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
+    }
+);
+
+const AppNavigator = createAppContainer(DirectoryNavigator);
+
+class Main extends Component {
+    render() {
+        return (
+            <View 
+                style={{
+                    flex: 1,
+                    paddingTop: Platform.OS === 'ios' ? 0 : ExpoStatusBar.Constants.statusBarHeight
+            }}>
+                <AppNavigator/>
+            </View>
+        );
+    }
+}
+
+export default Main;
+
+NOTESSSS START HEREEEEEE
+ 8) createStackNavigator is a function and it has 1 required arguement called the "route can fix object"===> where we set what components will be available for this stack as shown on 10-11
+ second and optional argument 14-21 is additional configuration... initial route means when the navigation is open it will default to show that component... the rest of 14-21 looks like styling...  
+
+27) createAppContainer will return a react component that handles connecting our top level navigator to the react native application environment to handle some functions such as responding to the back button on the device typically always wrap the top level naviagtor for your app with createAppContainer like shown on line 27
+
+37) the app navigator is a container for the DirectoryNavigator and the DirectoryNavigator contains the screens for both the directory and the campsiteinfo components
+
+35) padding on the top... react native takes care of mapping all components to both android and ios equivalent APIs it's not always perfect though. sometimes there will be descrepencies so to help avoid that we imported Platform... so 
+line 35) Platform.OS === 'ios' ? 0 : ExpoStatusBar.Constants.statusBarHeight is in the form of a ternary operand... 
+we'll check is the platform os ios if true then padding top =0 if false then we'll use this value that is exposed to us from expo to set the dynamic status bar height... 
+
+

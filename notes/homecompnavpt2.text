@@ -1,0 +1,68 @@
+import React, {Component} from 'react';
+import {View, Text, ScollView } from 'react-native';
+import {Card} from 'react-native-elements';
+import {CAMPSITES} from '../shared/campsites';
+import {PROMOTIONS} from '../shared/promotions';
+import {PARTNERS} from '../shared/partners';
+
+
+function RenderItem({item}) {
+    if (item) {
+        return (
+            <Card 
+                featuredTitle={item.name}
+                image={require('./images/react-lake.jpg')}
+            >
+                <Text style={{margin: 10}}>
+                    {item.description}
+                </Text>
+            </Card>
+        );
+    }
+    return <View />;
+}
+
+class Home extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state= {
+            campsites: CAMPSITES,
+            promotions: PROMOTIONS,
+            partners: PARTNERS
+        };
+    }
+
+    static navigationOptions = {
+        title: 'Home'
+    }
+
+    render() {
+        return (
+            <ScollView>
+                <RenderItem
+                    item={this.state.campsites.filter(campsite=> campsite.featured)[0]}
+                />
+                <RenderItem
+                    item={this.state.promotions.filter(promotion=> promotion.featured)[0]}
+                />
+                <RenderItem
+                    item={this.state.partners.filter(partner=> partner.featured)[0]}
+                />
+            </ScollView>
+        );
+    }
+}
+export default Home;
+
+NOTES!!!!!!
+42) ScollView => used to render groups or list of items like FlatList... major difference in the 2 is that ScollView loads all its child components at once; while FlatList uses Lazy Loading(only a part of a list is rendered at a time, the part that's on screen or about to be. the paarts that have scrolled far off sxreen are removed from memory.) LazyLoading improves performance and its more efficient for longer list
+
+9 ) creating a RenderItem component and passing it an item that will destructor from the props pbject... if the items value is valid we will return a card with featuredTitle of thee name... 
+
+14) Text component holds this items description
+
+21) returning an empty view in case the if block wasnt entered... 
+
+42-43 ) takes the campsites data from state then filter it to find the campsite with the featured flag then takes the first item of the array returned from the filter... 
+then next two cards operate the same just the promotion data and the partners data

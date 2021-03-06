@@ -1,0 +1,48 @@
+import React from 'react';
+import { Text, View } from 'react-native';
+import { Card } from 'react-native-elements';
+import {CAMPSITES} from '../shared/campsites';
+
+function RenderCampsite({campsite}) {
+    if (campsite) {
+        return (
+            <Card 
+                featuredTitle={campsite.name}
+                image={require('./images/react-lake.jpg')}
+            >
+                <Text style={{margin: 10}}>
+                    {campsite.description}
+                </Text>
+            </Card>
+        );
+    }
+    return <View />;
+}
+
+class CampsiteInfo extends Component {
+    constructor(props){
+        super(props);
+        this.state= {
+            campsites: CAMPSITES
+        };
+    }
+
+    static navigationOptions={
+        title: 'Campsite Information'
+    }
+
+    render() {
+        const campsiteId = this.props.navigation.getParam('CampsiteId');
+        const campsite = this.state.campsites.filter(campsite=> campsite.id === cmpsiteId)[0];
+         return <RenderCampsite campsite={campsite} />;
+    }
+}
+
+export default CampsiteInfo;
+
+NOTES!!!!!!!
+30) static is used in the same way we did on the directory component.. check notes if need be
+
+35) getParam is automatically passed with react navigation to all screens check notes (ReactNav)... 
+here we are setting a parameter to hold the campsite id of the camp thats being passed on the directory screen?
+now that we have the id we can access it.. have the campsites array in the local state so we can pull out what we want using filter then array index of 0 ...

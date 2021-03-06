@@ -1,0 +1,48 @@
+import React from 'react';
+import { FlatList } from 'react-native';
+import { ListItem } from 'react-native-elements';
+import {CAMPSITES} from '../shared/campsites';
+
+class Directory extends Component {
+    constructor(props) {
+        super(props);
+        this.state= {
+            campsites: CAMPSITES
+        };
+    }
+
+    static navigationOptions = {
+        title: 'Directory'
+    }
+    render() {
+        const {navigate} = this.props.navigation;
+        const renderDirectoryItem = ({item}) => {
+            return (
+                <ListItem
+                    title={item.name}
+                    subtitle={item.description}
+                    onPress={()=> navigate('CampsiteInfo', {campesiteId: item.id})}
+                    leftAvatar={{ source: require('./images/react-lake.jpg')}}
+                />
+            );
+        };
+
+        return (
+            <FlatList 
+                data={this.state.campsites}
+                renderItem={renderDirectoryItem}
+                keyExtractor={item => item.id.toString()}
+            />
+        );
+    }
+}
+
+export default Directory;
+
+NOTESSSSS!!!!
+ static keyword is a JS keyword that sets a method on the class itself rather than on the object instantiated from the class. 
+ 14-15) its being used to communicate this title to the directory navigators navigation options... 
+
+ 18) since navigate function is all we need we can destructure it out of the navi prop as seen.. if lost check ReactNav notes for more details then link with  24... where we give the navigate function two arguments 1) the name of the screen to navigate to 2) optional, extra parameters to the route.. in this case find a parameter called campsiteId and give it the id of the campsite that was pressed... 
+
+ 

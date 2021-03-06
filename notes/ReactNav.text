@@ -1,0 +1,13 @@
+Navigation Prop==> each screen in your app is provided with the navigation prop automatically. the Prop contains various convenience functions that dispatch navigation actions on the route's router.
+this.props.navigation
+    navigate - go to another screen, figures out the action it needs to take to do it
+    goBack - close active screen and move back in the stack
+    addListener - subscribe to updates to navigation lifecycle
+    isFocused - function that returns true if the screen is focused and false otherwise.
+    state - current state/routes
+    setParams - make changes to route's params
+    getParam - get a specific param with fallback
+    dispatch - send an action to router
+    dangerouslyGetParent - function that returns the parent navigator, if any
+It's important to highlight the navigation prop is not passed in to all components; only screen components receive this prop automatically! React Navigation doesn't do anything magic here. For example, if you were to define a MyBackButton component and render it as a child of a screen component, you would not be able to access the navigation prop on it. If, however, you wish to access the navigation prop in any of your components, you may use the withNavigation HOC.
+
