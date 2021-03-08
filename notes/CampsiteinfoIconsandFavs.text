@@ -69,6 +69,22 @@ class CampsiteInfo extends Component {
 
 export default CampsiteInfo;
 
+
+
+insert under 37) <Icon 
+                    name='heart-o'
+                    type='font-awesome'
+                    color='#f50'
+                    raised
+                    reverse
+                />
+
+        the name is how grab which icon from the type... the type is where you'd find the different icon packages available
+        77) is a color       raised= it will give the icon a shadow effect 
+        reverse means revese the color scheme ex) a red heart with white outline would switch to white hear and red outline
+
+        To make the icon respond to being pressed=>>> 
+
 NOTES!!!!!!!!!!
  60) comments variable and filtering out all of the comments that have a campsiteId property that matches the campsiteId that were trying to display
 
