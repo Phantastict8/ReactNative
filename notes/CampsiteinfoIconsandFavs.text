@@ -61,10 +61,21 @@ class CampsiteInfo extends Component {
         return(
             <ScrollView>
                 <RenderCampsite campsite={campsite} />
-                <RenderComments  comments={comments} />
+                <RenderComments comments={comments} />
             </ScrollView>
         );
     }
 }
 
 export default CampsiteInfo;
+
+NOTES!!!!!!!!!!
+ 60) comments variable and filtering out all of the comments that have a campsiteId property that matches the campsiteId that were trying to display
+
+ 64) rendering RenderComments and passing it the comments array that we just filterd out in line 60
+
+ 7) creating the RenderComments component.. as a functional component.. 
+    it gets the comments array as a property of the props object..
+    17-18) returning a card component with the title Comments. 
+    19-23) comments are in an array  so it's a perfect oppurtunity to use FlatList which expects its data in the form of an array line. 19) for its data we gave it the comments array for the renderItem wwe gave it the function that we made on lines 8-16.. and we destructure the item prop out... which it automatically gets since its a function inside a function... bcuz all the items have a unique ID we set the keyExtractor to use that id for the unique key... 
+    8-16) we set up the function mentioned above... returning a few lines of text... put inside a view since the return should hold one <elemnent> but can have mulitple elements inside that one... dont forget we use double {{}} to style so the compiler doesnt think we are trying to use a variable... 
