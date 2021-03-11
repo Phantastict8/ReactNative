@@ -79,7 +79,8 @@ const DirectoryNavigator = createStackNavigator(
                     onPress={() =>navigation.toggleDrawer()}
                 />
             })
-        }
+        },
+        CampsiteInfo: {screen: CampsiteInfo}, 
     },
     {
         initialRoutename: 'Directory',
