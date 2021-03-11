@@ -1,0 +1,13 @@
+console log is the easiest way to check something and we did so with the fav icon which when already pressed it would log the message "already set as favorite"; however the console is not always easy to read....
+
+in react native when running in developer mode there is sometimes an in app developer menu provided by the expo... Command + m on mac or control + m on windows (mobile device: shake slightly)... if that doesnt work open a new bash terminal and run this command: adb shell input keyevent 82
+the dev menu gives us several options but we want "debug js remotely" => will open a web page, there u can open the dev tools and see the logs from react logger which is much easier to look through than in the bash terminal... 
+It will make the app slower so dont run all the time only when u need it 
+
+other option to check out is "toggle inspector" then you can select different components in the UI and get some info back about it from the inspector... not very useful on its own but when used in combination with another tool (check next section in notes)
+
+Standalone React-Dev tools... can be installed as a package =>  yarn global add react-devtools@4.8.2
+use a seperate terminal to 1)expo start
+use a seperate terminal to 2)restart the json-server in the json-server
+use a seperate terminal to 3) run => react-devtools => will open a stand alone window where you can view details bout the application .. if it doesnt connect automatically just reload the app in the emulator.. 
+when react devtools is connected and we have the inspector toggled on now when we click on components react dev tools will find a component in its window... 
