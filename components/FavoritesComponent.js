@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, View, Text, StyleSheet } from 'react-native';
+import { FlatList, View, Text, StyleSheet, Alert } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { Loading } from './LoadingComponent';
@@ -8,7 +8,7 @@ import { SwipeRow } from 'react-native-swipe-list-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { deleteFavorite } from '../redux/ActionCreators';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         campsites: state.campsites,
         favorites: state.favorites,
@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    deleteFavorite: (campsiteId) => deleteFavorite(campsiteId),
+    deleteFavorite: campsiteId => deleteFavorite(campsiteId),
 };
 
 class Favorites extends Component {
@@ -32,7 +32,33 @@ class Favorites extends Component {
                     <View style={styles.deleteView}>
                         <TouchableOpacity
                             style={styles.deleteTouchable}
-                            onPress={() => this.props.deleteFavorite(item.id)}>
+                            onPress={() =>
+                                Alert.alert(
+                                    'Delete Favorite?',
+                                    'Are you sure you wish to delete the favorite campsite ' +
+                                        item.name +
+                                        '?',
+                                    [
+                                        {
+                                            text: 'Cancel',
+                                            onPress: () =>
+                                                console.log(
+                                                    item.name + 'Not Deleted'
+                                                ),
+                                            style: 'cancel',
+                                        },
+                                        {
+                                            text: 'OK',
+                                            onPress: () =>
+                                                this.props.deleteFavorite(
+                                                    item.id
+                                                ),
+                                        },
+                                    ],
+                                    { cancelable: false }
+                                )
+                            }
+                        >
                             <Text style={styles.deleteText}>Delete</Text>
                         </TouchableOpacity>
                     </View>
@@ -67,11 +93,11 @@ class Favorites extends Component {
         }
         return (
             <FlatList
-                data={this.props.campsites.campsites.filter((campsite) =>
+                data={this.props.campsites.campsites.filter(campsite =>
                     this.props.favorites.includes(campsite.id)
                 )}
                 renderItem={renderFavoriteItem}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={item => item.id.toString()}
             />
         );
     }
@@ -95,7 +121,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 16,
         width: 100,
-    }
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
