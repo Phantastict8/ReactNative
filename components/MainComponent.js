@@ -7,10 +7,7 @@ import Contact from './ContactComponent';
 import Reservation from './ReservationComponent';
 import Favorites from './FavoritesComponent';
 import Login from './LoginComponent';
-import {
-    View,
-    Platform,
-    StyleSheet,
+import {    View,    Platform,    StyleSheet,
     Text,
     ScrollView,
     Image,
@@ -21,10 +18,7 @@ import { createAppContainer } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import SafeAreaView from 'react-native-safe-area-view';
 import { connect } from 'react-redux';
-import {
-    fetchCampsites,
-    fetchComments,
-    fetchPromotions,
+import {    fetchCampsites,    fetchComments,    fetchPromotions,
     fetchPartners,
 } from '../redux/ActionCreators';
 import { StatusBar } from 'expo-status-bar';
